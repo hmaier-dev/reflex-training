@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+    "flag"
 )
 
 func main(){
@@ -57,5 +58,22 @@ func main(){
 
 
 
+
+var maximum int
+
+func init(){
+    flag.IntVar(&maximum ,"random-range", 5, "display action in range from 1 to n seconds")
+    flag.Parse()
+}
+
+func main(){
+
+    for {
+        sleeping := rand.Intn(maximum - 1)+1 
+        fmt.Println(sleeping)
+        time.Sleep(time.Second * time.Duration(sleeping))
+        aktion := aktionen[rand.Intn(len(aktionen))]
+        fmt.Println("Verteidige ",  aktion.Name, " mit ", aktion.Verteidigungen[rand.Intn(len(aktion.Verteidigungen))])
+    }
 
 }
